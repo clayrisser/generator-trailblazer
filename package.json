@@ -38,7 +38,8 @@
     "supertest": "^1.2"
   },
   "scripts": {
-    "test": "eslint . && mocha"
+    "test": "eslint . && mocha",
+    "start": "nodemon server.js"
   },
   "engines": {
     "node": ">= 4.0.0"
