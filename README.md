@@ -6,6 +6,9 @@ IMO the perfect trails setup
 * Automatic API documentation with swagger
 * Custom responses
 * Super swag error handling
+* Automatic endpoint creation with footprints
+* Express for the server
+* Waterline for the ORM
 
 ## Setup
 ```
