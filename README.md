@@ -1,6 +1,6 @@
-# oauth-trails
+# trailblazer
 
-IMO the perfect trails setup
+An implementation of TrailsJS with oAuth swagger and other goodies
 
 ## Features
 * Automatic reloading
