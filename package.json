@@ -18,7 +18,10 @@
     "trailsjs"
   ],
   "dependencies": {
+    "err": "^2.1.5",
     "express": "^5.0.0-alpha.2",
+    "express-custom-response": "^0.1.1",
+    "lodash": "^4.17.4",
     "trailpack-express": "^2.0.3",
     "trailpack-footprints": "^2.0.0",
     "trailpack-repl": "v2-latest",

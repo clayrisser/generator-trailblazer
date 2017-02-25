@@ -25,11 +25,11 @@ module.exports = class DefaultService extends Service {
         });
       }
     });
-    return {
+    return Promise.resolve({
       app: this.app.pkg.version,
       node: process.version,
       libs: process.versions,
       trailpacks: trailpacks
-    };
+    });
   }
 }
