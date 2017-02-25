@@ -7,6 +7,7 @@
 'use strict';
 
 require('express-custom-response')(__dirname + '/api/responses');
+
 const TrailsApp = require('trails');
 const app = require('./');
 const server = new TrailsApp(app);
