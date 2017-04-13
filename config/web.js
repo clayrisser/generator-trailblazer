@@ -1,5 +1,7 @@
 'use strict';
 
+const bodyParser = require('body-parser');
+
 /**
  * Server Configuration
  * (app.config.web)
@@ -21,15 +23,15 @@ module.exports = {
   /**
    * Init method, can be used to customize express instance
    */
-  //init: (trailsApp, expressApp) => {},
+  init: (trailsApp, expressApp) => {
+    trailsApp.log.info('app starteakfjdslkfdf');
+  },
 
   /**
    * Middlewares to load (in order)
    */
   middlewares: {
 
-    /*
-    //middlewares loading order
     order: [
      'addMethods',
      'cookieParser',
@@ -41,16 +43,12 @@ module.exports = {
      'router',
      '404',
      '500'
-    ]*/
+    ],
 
-    /**
-     * Middlewares to load for body parsing
     bodyParser: [
       bodyParser.json(),
       bodyParser.urlencoded({extended: false})
     ]
-     */
-
   },
 
   /***************************************************************************
@@ -73,7 +71,7 @@ module.exports = {
   /**
    * The port to bind the web server to
    */
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 8888,
 
   /**
    * The host to bind the web server to

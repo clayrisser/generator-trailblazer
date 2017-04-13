@@ -1,7 +1,7 @@
 /**
  * api/responses/error.js
  *
- * Handles error in a clean way
+ * @description Handles error in a clean way
  */
 
 var _ = require('lodash');

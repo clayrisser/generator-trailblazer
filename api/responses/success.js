@@ -1,7 +1,7 @@
 /**
   * api/responses/success.js
   *
-  * Handles success in a clean way
+  * @description Handles success in a clean way
  */
 
 var _ = require('lodash');

@@ -18,6 +18,7 @@
     "trailsjs"
   ],
   "dependencies": {
+    "check-params": "^0.2.0",
     "err": "^2.1.5",
     "express": "^5.0.0-alpha.2",
     "express-custom-response": "^0.1.1",
@@ -39,7 +40,10 @@
   },
   "scripts": {
     "test": "eslint . && mocha",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "docker build -t jamrizzi/trails-imo -f ./deployment/Dockerfile .",
+    "push": "docker push -t jamrizzi/trails-imo",
+    "run": "docker run --rm -p 8888:8888 jamrizzi/trails-imo"
   },
   "engines": {
     "node": ">= 4.0.0"
