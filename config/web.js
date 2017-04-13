@@ -71,11 +71,7 @@ module.exports = {
   /**
    * The port to bind the web server to
    */
-<<<<<<< 8eec850e437afcc3e40e3cc3727c51aeacb92c91
   port: process.env.PORT || 8888,
-=======
-  port: process.env.PORT || 3000,
->>>>>>> Initial commit
 
   /**
    * The host to bind the web server to
