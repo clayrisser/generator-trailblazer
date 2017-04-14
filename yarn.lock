@@ -1384,6 +1384,10 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
 
+safe-access@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/safe-access/-/safe-access-0.1.0.tgz#ce46b1190bd316672e1c7d001cab32970c488955"
+
 send@0.15.1:
   version "0.15.1"
   resolved "https://registry.yarnpkg.com/send/-/send-0.15.1.tgz#8a02354c26e6f5cca700065f5f0cdeba90ec7b5f"

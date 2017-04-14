@@ -1,3 +1,5 @@
+const controllerNames = Object.keys(require('../api/controllers'));
+
 /**
  * Footprints Configuration
  * (config.footprints)
@@ -12,7 +14,7 @@ module.exports = {
   /**
    * Generate routes for controller handlers.
    */
-  controllers: false,
+  controllers: {ignore: controllerNames},
 
   /**
    * Generate conventional Create, Read, Update, and Delete (CRUD) routes for

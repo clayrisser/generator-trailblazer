@@ -21,11 +21,18 @@ module.exports = [
   },
 
   /**
-   * Constrain the DefaultController.info handler to accept only GET requests.
+   * Return some info about this application
    */
   {
-    method: [ 'GET' ],
+    method: 'GET',
     path: '/api/v1/default/info',
-    handler: 'DefaultController.info'
+    handler: 'DefaultController.info',
+    config: {
+      plugins: {
+        swagger: {
+          description: 'Return some info about this application'
+        }
+      }
+    }
   }
 ];
