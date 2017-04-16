@@ -1,5 +1,5 @@
 #############################################
-# Dockerfile to run Trails IMO
+# Dockerfile to run Oauth Trails
 # Based on Alpine
 #############################################
 

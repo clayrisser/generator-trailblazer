@@ -42,9 +42,9 @@
   "scripts": {
     "test": "eslint . && mocha",
     "start": "nodemon server.js",
-    "build": "docker build -t jamrizzi/trails-imo -f ./deployment/Dockerfile .",
-    "push": "docker push -t jamrizzi/trails-imo",
-    "run": "docker run --rm -p 8888:8888 jamrizzi/trails-imo",
+    "build": "docker build -t jamrizzi/oauth-trails -f ./deployment/Dockerfile .",
+    "push": "docker push -t jamrizzi/oauth-trails",
+    "run": "docker run --rm -p 8888:8888 jamrizzi/oauth-trails",
     "lint": "eslint ."
   },
   "engines": {

@@ -1,4 +1,5 @@
-# trails-imo
+# oauth-trails
+
 IMO the perfect trails setup
 
 ## Features
