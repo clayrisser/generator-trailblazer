@@ -4,7 +4,7 @@
   * @description Handles success in a clean way
  */
 
-var _ = require('lodash');
+const _ = require('lodash');
 
 module.exports = function(data, message) {
   if (!message) {

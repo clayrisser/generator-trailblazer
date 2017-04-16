@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "eslint": "^2.11",
-    "eslint-config-trails": "^2",
+    "eslint-config-trails": "git+https://github.com/jamrizzi/eslint-config-trails.git",
     "mocha": "^2.5",
     "supertest": "^1.2"
   },
@@ -44,7 +44,8 @@
     "start": "nodemon server.js",
     "build": "docker build -t jamrizzi/trails-imo -f ./deployment/Dockerfile .",
     "push": "docker push -t jamrizzi/trails-imo",
-    "run": "docker run --rm -p 8888:8888 jamrizzi/trails-imo"
+    "run": "docker run --rm -p 8888:8888 jamrizzi/trails-imo",
+    "lint": "eslint ."
   },
   "engines": {
     "node": ">= 4.0.0"

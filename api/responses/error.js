@@ -4,11 +4,10 @@
  * @description Handles error in a clean way
  */
 
-var _ = require('lodash');
-var log = require('../../config/log').logger;
+const log = require('../../config/log').logger;
 
 module.exports = function(err, verbose) {
-  var code = 500;
+  let code = 500;
   verbose = false;
   if (err.code) {
     code = Number(err.code);

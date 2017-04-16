@@ -33,16 +33,16 @@ module.exports = {
   middlewares: {
 
     order: [
-     'addMethods',
-     'cookieParser',
-     'session',
-     'bodyParser',
-     'compression',
-     'methodOverride',
-     'www',
-     'router',
-     '404',
-     '500'
+      'addMethods',
+      'cookieParser',
+      'session',
+      'bodyParser',
+      'compression',
+      'methodOverride',
+      'www',
+      'router',
+      '404',
+      '500'
     ],
 
     bodyParser: [

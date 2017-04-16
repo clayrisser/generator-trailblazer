@@ -2,10 +2,10 @@
 
 module.exports = {
 
-  "paths": {
-    "/default/info": {
-      "get": {
-        "description": "Return some info about this application"
+  paths: {
+    '/default/info': {
+      get: {
+        description: 'Return some info about this application'
       }
     }
   }

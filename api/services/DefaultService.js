@@ -32,4 +32,4 @@ module.exports = class DefaultService extends Service {
       trailpacks: trailpacks
     });
   }
-}
+};
