@@ -23,7 +23,7 @@ RUN apk add --no-cache tini && \
 COPY ./package.json /app/
 RUN npm install --only=dev && npm install
 COPY ./ /app/
-RUN npm run test && \
+RUN npm test && \
     apk del build-dependencies && \
     npm uninstall -g eslint && \
     npm prune --production
