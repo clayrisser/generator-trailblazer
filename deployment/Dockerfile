@@ -17,11 +17,15 @@ EXPOSE 8888
 WORKDIR /app/
 
 RUN apk add --no-cache tini && \
-    apk add --no-cache --virtual build-dependencies git
+    apk add --no-cache --virtual build-dependencies git && \
+    npm install -g eslint
 
 COPY ./package.json /app/
-RUN npm install
+RUN npm install --only=dev && npm install
 COPY ./ /app/
-RUN apk del build-dependencies
+RUN npm run test && \
+    apk del build-dependencies && \
+    npm uninstall -g eslint && \
+    npm prune --production
 
 ENTRYPOINT ["/sbin/tini", "--", "node", "/app/server.js"]
