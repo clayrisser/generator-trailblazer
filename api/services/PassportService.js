@@ -32,10 +32,7 @@ module.exports = class AuthService extends Service {
       clientID: c.providers.facebook.clientId,
       clientSecret: c.providers.facebook.clientSecret,
       callbackURL: c.providers.facebook.callbackUrl,
-      profileFields: [
-        'email',
-        'name'
-      ]
+      profileFields: c.providers.facebook.profileFields
     }, this.facebook));
   }
 

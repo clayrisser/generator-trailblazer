@@ -25,10 +25,14 @@ module.exports = {
     clientSecret: env.FACEBOOK_CLIENT_SECRET ?
       env.FACEBOOK_CLIENT_SECRET : '613d374ae7514e0fa5e2740d2c57d5b9',
     callbackUrl: env.FACEBOOK_CALLBACK ?
-      env.FACEBOOK_CALLBACK : 'http://localhost:1337/auth/callback/facebook',
+      env.FACEBOOK_CALLBACK : 'http://localhost:8888/api/v1/auth/callback/facebook',
     scope: [
       'email',
       'user_about_me'
+    ],
+    profileFields: [
+      'email',
+      'name'
     ]
   }
 };
