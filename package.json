@@ -25,6 +25,7 @@
     "express-custom-response": "^0.1.1",
     "jwt-simple": "^0.5.1",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-github2": "^0.1.10",
@@ -48,7 +49,7 @@
   },
   "scripts": {
     "test": "eslint . && mocha",
-    "start": "nodemon server.js",
+    "start": "nodemon -e js -x 'npm run lint && node server.js || exit 1'",
     "build": "docker build -t jamrizzi/oauth-trails -f ./deployment/Dockerfile .",
     "push": "docker push -t jamrizzi/oauth-trails",
     "run": "docker run --rm -p 8888:8888 jamrizzi/oauth-trails",

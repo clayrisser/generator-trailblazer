@@ -52,11 +52,5 @@ module.exports = [
     method: 'GET',
     path: '/api/v1/auth/get-token',
     handler: 'AuthController.getToken'
-  },
-
-  {
-    method: 'GET',
-    path: '/api/v1/auth/authenticated',
-    handler: 'AuthController.authenticated'
   }
 ];

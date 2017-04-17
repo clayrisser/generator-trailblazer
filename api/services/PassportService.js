@@ -106,23 +106,28 @@ module.exports = class AuthService extends Service {
     const o = this.app.orm;
     properties[providerIdName] = properties.providerId;
     delete properties.providerId;
-    return o.User.findOne({email: properties.email})
-      .then(function(user) {
-        if (user) {
-          if (user[providerIdName]) { // find
-            return user;
-          } else { // update
-            return new Promise(function(resolve, reject) {
-              user[providerIdName] = properties[providerIdName];
-              user.save(function(err) {
-                if (err) reject(err);
-                resolve(user);
+    const query = {};
+    query[providerIdName] = properties[providerIdName];
+    return o.User.findOne(query).then((user) => { // find by providerId
+      if (user) return user;
+      return o.User.findOne({email: properties.email})
+        .then(function(user) { // find by email
+          if (user) {
+            if (user[providerIdName]) {
+              return user;
+            } else { // attach providerId
+              return new Promise(function(resolve, reject) {
+                user[providerIdName] = properties[providerIdName];
+                user.save(function(err) {
+                  if (err) reject(err);
+                  resolve(user);
+                });
               });
-            });
+            }
+          } else { // create new user
+            return o.User.create(properties);
           }
-        } else { // create
-          return o.User.create(properties);
-        }
-      });
+        });
+    });
   }
 };

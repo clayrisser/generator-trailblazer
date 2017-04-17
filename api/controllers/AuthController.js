@@ -2,7 +2,7 @@
 
 const Controller = require('trails/controller');
 const checkParams = require('check-params');
-const Err = require('err');
+const access = require('safe-access');
 
 /**
  * @module AuthController
@@ -29,7 +29,7 @@ module.exports = class AuthController extends Controller {
         'provider'
       ]
     }).then((message) => {
-      return s.AuthService.callback(req, res, req.params.provider).then((user) => {
+      return s.AuthService.callback(req, req.params.provider).then((user) => {
         return res.success(user, 'Login successful');
       });
     }).catch((err) => res.error(err));
@@ -37,25 +37,8 @@ module.exports = class AuthController extends Controller {
 
   getToken(req, res) {
     const s = this.app.services;
-    if (!req.session.user) return res.error(new Err('user not in session', 400));
-    const user = req.session.user;
-    const token = s.AuthService.generateToken(user);
-    return res.success({
-      user: user,
-      token: token
-    });
-  }
-
-  authenticated(req, res) {
-    if (req.jwt.authenticated) {
-      return res.success({
-        authenticated: true,
-        user: req.jwt.user
-      }, 'User is authenticated');
-    } else {
-      return res.success({
-        authenticated: false
-      }, 'User is not authenticated');
-    }
+    return s.AuthService.getToken(access(req, 'session.user')).then((data) => {
+      return res.success(data, 'User is logged in');
+    }).catch((err) => res.error(err));
   }
 };
