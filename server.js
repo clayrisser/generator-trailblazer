@@ -11,4 +11,6 @@ const TrailsApp = require('trails');
 const app = require('./');
 const server = new TrailsApp(app);
 
-server.start().catch(err => server.stop(err));
+server.start().then((app) => {
+  app.services.PassportService.init();
+}).catch(err => server.stop(err));

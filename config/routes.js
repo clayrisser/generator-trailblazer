@@ -34,5 +34,29 @@ module.exports = [
         }
       }
     }
+  },
+
+  {
+    method: 'GET',
+    path: '/api/v1/auth/provider/{provider}',
+    handler: 'AuthController.provider'
+  },
+
+  {
+    method: 'GET',
+    path: '/api/v1/auth/callback/{provider}',
+    handler: 'AuthController.callback'
+  },
+
+  {
+    method: 'GET',
+    path: '/api/v1/auth/get-token',
+    handler: 'AuthController.getToken'
+  },
+
+  {
+    method: 'GET',
+    path: '/api/v1/auth/authenticated',
+    handler: 'AuthController.authenticated'
   }
 ];

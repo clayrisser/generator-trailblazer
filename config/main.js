@@ -30,5 +30,7 @@ module.exports = {
   paths: {
     root: path.resolve(__dirname, '..'),
     temp: path.resolve(__dirname, '..', '.tmp')
-  }
+  },
+
+  jwtSecret: 'hello-jwt'
 };
