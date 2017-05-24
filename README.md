@@ -1,6 +1,8 @@
 # trailblazer
 
-An implementation of TrailsJS with oAuth swagger and other goodies
+A pragmatic implementation of TrailsJS for rapid development
+
+Loosely based on a SailsJS workflow
 
 ## Features
 * Automatic reloading

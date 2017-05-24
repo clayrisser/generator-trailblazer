@@ -1,7 +1,7 @@
 {
-  "name": "trails-imo",
+  "name": "trailblazer",
   "version": "0.0.0",
-  "description": "IMO the perfect trails setup",
+  "description": "A pragmatic implementation of TrailsJS for rapid development",
   "homepage": "https://github.com/jamrizzi/trails-imo",
   "author": {
     "name": "Jam Risser",
@@ -53,6 +53,7 @@
     "build": "docker build -t jamrizzi/oauth-trails -f ./deployment/Dockerfile .",
     "push": "docker push -t jamrizzi/oauth-trails",
     "run": "docker run --rm -p 8888:8888 jamrizzi/oauth-trails",
+    "database": "docker run --name some-mongo --rm -p 27017:27017 mongo:latest",
     "lint": "eslint ."
   },
   "engines": {
