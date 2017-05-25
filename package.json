@@ -20,6 +20,7 @@
   "dependencies": {
     "change-case": "^3.0.1",
     "check-params": "^0.2.0",
+    "ejs": "^2.5.6",
     "err": "^2.1.5",
     "express": "^5.0.0-alpha.2",
     "express-custom-response": "^0.1.1",

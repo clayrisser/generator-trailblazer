@@ -30,15 +30,23 @@ module.exports = class AuthController extends Controller {
       ]
     }).then((message) => {
       return s.AuthService.callback(req, req.params.provider).then((user) => {
-        return res.success(user, 'Login successful');
+        return s.AuthService.getToken(user).then((context) => {
+          return res.render('callback.ejs', {
+            context: context
+          });
+        });
       });
     }).catch((err) => res.error(err));
   }
 
   getToken(req, res) {
     const s = this.app.services;
-    return s.AuthService.getToken(access(req, 'session.user')).then((data) => {
-      return res.success(data, 'User is logged in');
+    return s.AuthService.getToken(access(req, 'session.user')).then((context) => {
+      return res.success(context, 'User is logged in');
     }).catch((err) => res.error(err));
+  }
+
+  login(req, res) {
+    res.render('login.ejs');
   }
 };

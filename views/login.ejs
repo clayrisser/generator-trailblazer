@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Callback</title>
+  </head>
+  <body>
+    <button id="github-login">GitHub Login</button>
+    <button id="facebook-login">Facebook Login</button>
+    <script>
+
+      // GitHub login
+      var githubLogin = document.getElementById('github-login');
+      githubLogin.onclick = function(e) {
+        var github = window.open('/api/v1/auth/provider/github');
+        github.callback = function(context) {
+          console.log(context);
+        };
+      };
+
+      // Facebook login
+      var facebookLogin = document.getElementById('facebook-login');
+      facebookLogin.onclick = function(e) {
+        var facebook = window.open('/api/v1/auth/provider/facebook');
+        facebook.callback = function(context) {
+          console.log(context);
+        };
+      };
+    </script>
+  </body>
+</html>

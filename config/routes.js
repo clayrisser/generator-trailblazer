@@ -21,6 +21,15 @@ module.exports = [
   },
 
   /**
+   * Render the login view
+   */
+  {
+    method: 'GET',
+    path: '/login',
+    handler: 'AuthController.login'
+  },
+
+  /**
    * Return some info about this application
    */
   {
