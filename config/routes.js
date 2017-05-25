@@ -25,8 +25,8 @@ module.exports = [
    */
   {
     method: 'GET',
-    path: '/login',
-    handler: 'AuthController.login'
+    path: '/api/v1/login',
+    handler: 'ViewController.login'
   },
 
   /**
@@ -43,6 +43,18 @@ module.exports = [
         }
       }
     }
+  },
+
+  {
+    method: 'POST',
+    path: '/api/v1/auth/register',
+    handler: 'AuthController.register'
+  },
+
+  {
+    method: 'GET',
+    path: '/api/v1/auth/login',
+    handler: 'AuthController.login'
   },
 
   {

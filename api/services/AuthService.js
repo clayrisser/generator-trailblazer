@@ -14,10 +14,30 @@ const Err = require('err');
  */
 module.exports = class AuthService extends Service {
 
+  register(req) {
+    return new Promise((resolve, reject) => {
+      passport.authenticate('signup', (err, user) => {
+        if (err) return reject(err);
+        req.session.user = user;
+        return resolve(user);
+      })(req);
+    });
+  }
+
+  login(req) {
+    return new Promise((resolve, reject) => {
+      passport.authenticate('login', (err, user) => {
+        if (err) return reject(err);
+        req.session.user = user;
+        return resolve(user);
+      })(req);
+    });
+  }
+
   provider(req, res, provider) {
     const c = this.app.config;
     return new Promise((resolve, reject) => {
-      if (_.includes(_.keys(c.providers), provider)) {
+      if (_.includes(_.keys(c.providers), provider) && provider !== 'local') {
         passport.authenticate(provider, {
           scope: c.providers[provider].scope
         })(req, res);

@@ -11,6 +11,39 @@ const access = require('safe-access');
  */
 module.exports = class AuthController extends Controller {
 
+  register(req, res) {
+    const s = this.app.services;
+    return checkParams(req, {
+      bodyParams: [
+        'username',
+        'email',
+        'password'
+      ]
+    }).then((message) => {
+      return s.AuthService.register(req).then((user) => {
+        return s.AuthService.getToken(user).then((context) => {
+          return res.success(context);
+        });
+      });
+    }).catch((err) => res.error(err));
+  }
+
+  login(req, res) {
+    const s = this.app.services;
+    return checkParams(req, {
+      queryParams: [
+        'password',
+        'username'
+      ]
+    }).then((message) => {
+      return s.AuthService.login(req).then((user) => {
+        return s.AuthService.getToken(user).then((context) => {
+          return res.success(context);
+        });
+      });
+    }).catch((err) => res.error(err));
+  }
+
   provider(req, res) {
     const s = this.app.services;
     return checkParams(req, {
@@ -44,9 +77,5 @@ module.exports = class AuthController extends Controller {
     return s.AuthService.getToken(access(req, 'session.user')).then((context) => {
       return res.success(context, 'User is logged in');
     }).catch((err) => res.error(err));
-  }
-
-  login(req, res) {
-    res.render('login.ejs');
   }
 };

@@ -9,6 +9,11 @@ const env = process.env;
 
 module.exports = {
 
+  local: {
+    usernameField: 'username',
+    passwordField: 'password'
+  },
+
   github: {
     clientId: env.GITHUB_CLIENT_ID ?
       env.GITHUB_CLIENT_ID : '3d62ecb18190c4585fb0',

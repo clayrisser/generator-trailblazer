@@ -1,11 +1,14 @@
 'use strict';
 
+const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
 const Service = require('trails/service');
 const passport = require('passport');
 const changeCase = require('change-case');
+const Err = require('err');
+const bCrypt = require('bcrypt-nodejs');
 
 /**
  * @module PassportService
@@ -16,6 +19,16 @@ module.exports = class AuthService extends Service {
 
   init() {
     const c = this.app.config;
+    passport.use('signup', new LocalStrategy({
+      passReqToCallback: true,
+      usernameField: c.providers.local.usernameField,
+      passwordField: c.providers.local.passwordField
+    }, this.signup));
+    passport.use('login', new LocalStrategy({
+      passReqToCallback: true,
+      usernameField: c.providers.local.usernameField,
+      passwordField: c.providers.local.passwordField
+    }, this.login));
     passport.use(new JwtStrategy({
       secretOrKey: c.main.jwtSecret,
       jwtFromRequest: (req) => {
@@ -34,6 +47,61 @@ module.exports = class AuthService extends Service {
       callbackURL: c.providers.facebook.callbackUrl,
       profileFields: c.providers.facebook.profileFields
     }, this.facebook));
+  }
+
+  signup(req, userName, password, cb) {
+    const o = this.app.orm;
+    const email = req.body.email;
+    const properties = this.generateProperties({
+      userName: userName,
+      firstName: userName,
+      lastName: false,
+      displayName: userName,
+      email: email,
+      providerId: false
+    });
+    properties.password = bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+    return o.User.findOne({email: email}).then((user) => {
+      if (user) {
+        if (user.password && user.password.length > 0) {
+          throw new Err(`The email '${email}' is already taken`, 400);
+        } else {
+          return this.updatePassword(user, properties.password);
+        }
+      } else {
+        return o.User.findOne({userName: userName}).then((user) => {
+          if (user) {
+            if (user.password && user.password.length > 0) {
+              throw new Err(`The username '${userName}' is already taken`, 400);
+            } else {
+              return this.updatePassword(user, properties.password);
+            }
+          } else {
+            return o.User.create(properties).then((user) => {
+              return user;
+            });
+          }
+        });
+      }
+    }).then(user => cb(null, user)).catch(err => cb(err, null));
+  }
+
+  login(req, userName, password, cb) {
+    const o = this.app.orm;
+    return o.User.findOne({userName: userName}).then((user) => {
+      if (!user) {
+        return o.User.findOne({email: userName}).then((user) => {
+          if (!user) throw new Err(`No account exists for '${userName}'`, 400);
+          return user;
+        });
+      }
+      return user;
+    }).then((user) => {
+      if (!user.password) throw new Err('Password not set', 400);
+      const valid = bCrypt.compareSync(password, user.password);
+      if (!valid) throw new Err('Incorrect password', 400);
+      return cb(null, user);
+    }).catch(err => cb(err, null));
   }
 
   jwt(payload, cb) {
@@ -94,10 +162,10 @@ module.exports = class AuthService extends Service {
     const properties = {
       userName: data.userName,
       firstName: data.firstName,
-      displayName: data.displayName,
-      email: data.email,
-      providerId: data.providerId
+      displayName: data.displayName
     };
+    if (data.email) properties.email = data.email;
+    if (data.providerId) properties.providerId = data.providerId;
     if (data.lastName) properties.lastName = data.lastName;
     return properties;
   }
@@ -111,12 +179,12 @@ module.exports = class AuthService extends Service {
     return o.User.findOne(query).then((user) => { // find by providerId
       if (user) return user;
       return o.User.findOne({email: properties.email})
-        .then(function(user) { // find by email
+        .then((user) => { // find by email
           if (user) {
             if (user[providerIdName]) {
               return user;
             } else { // attach providerId
-              return new Promise(function(resolve, reject) {
+              return new Promise((resolve, reject) => {
                 user[providerIdName] = properties[providerIdName];
                 user.save(function(err) {
                   if (err) reject(err);
@@ -128,6 +196,16 @@ module.exports = class AuthService extends Service {
             return o.User.create(properties);
           }
         });
+    });
+  }
+
+  updatePassword(user, password) {
+    return new Promise((resolve, reject) => {
+      user.password = password;
+      user.save((err) => {
+        if (err) return reject(err);
+        return resolve(user);
+      });
     });
   }
 };

@@ -12,4 +12,8 @@ module.exports = class ViewController extends Controller {
   helloWorld(req, res) {
     return res.success('Hello Trailblazer!');
   }
+
+  login(req, res) {
+    res.render('login.ejs');
+  }
 };
