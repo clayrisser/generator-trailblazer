@@ -1,5 +1,3 @@
-'use strict';
-
-exports.AuthService = require('./AuthService');
-exports.DefaultService = require('./DefaultService');
-exports.PassportService = require('./PassportService');
+export const AuthService = require('./AuthService').default;
+export const DefaultService = require('./DefaultService').default;
+export const PassportService = require('./PassportService').default;

@@ -1,1 +1,1 @@
-'use strict';
+export const AuthPolicy = require('./Auth').default;

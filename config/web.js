@@ -1,16 +1,6 @@
-'use strict';
+import bodyParser from 'body-parser';
 
-const bodyParser = require('body-parser');
-
-/**
- * Server Configuration
- * (app.config.web)
- *
- * Configure the Web Server
- *
- * @see {@link http://trailsjs.io/doc/config/web}
- */
-module.exports = {
+export default {
   express: require('express'),
 
   /**
@@ -42,13 +32,18 @@ module.exports = {
       'www',
       'router',
       '404',
-      '500'
+      'errorHandler'
     ],
 
     bodyParser: [
       bodyParser.json(),
       bodyParser.urlencoded({extended: false})
-    ]
+    ],
+
+    errorHandler(err, req, res, next) {
+      if (err) return res.error(err);
+      return res.error(new Error('Unknown error'));
+    }
   },
 
   /***************************************************************************

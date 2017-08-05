@@ -1,15 +1,6 @@
-/**
- * Logging Configuration
- * (app.config.log)
- *
- * @see http://trailsjs.io/doc/config/log
- */
+import winston from 'winston';
 
-'use strict';
-
-const winston = require('winston');
-
-module.exports = {
+export default {
 
   /**
    * Specify the logger to use.
@@ -27,5 +18,4 @@ module.exports = {
       })
     ]
   })
-
 };

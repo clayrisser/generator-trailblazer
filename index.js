@@ -1,5 +1,5 @@
-'use strict';
-
-exports.pkg = require('./package');
-exports.config = require('./config');
-exports.api = require('./api');
+export default {
+  pkg: require('./package'),
+  config: require('./config'),
+  api: require('./api')
+};

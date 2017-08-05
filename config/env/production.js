@@ -1,8 +1,6 @@
-'use strict';
+import winston from 'winston';
 
-const winston = require('winston');
-
-module.exports = {
+export default {
 
   trailpack: {
     disabled: [
@@ -33,5 +31,4 @@ module.exports = {
       ]
     })
   }
-
 };

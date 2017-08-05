@@ -1,21 +1,15 @@
-'use strict';
+import Service from 'trails/service';
+import passport from 'passport';
+import changeCase from 'change-case';
+import Err from 'err';
+import bCrypt from 'bcrypt-nodejs';
 
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GitHubStrategy = require('passport-github2').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
-const Service = require('trails/service');
-const passport = require('passport');
-const changeCase = require('change-case');
-const Err = require('err');
-const bCrypt = require('bcrypt-nodejs');
 
-/**
- * @module PassportService
- *
- * @description Passport Service
- */
-module.exports = class AuthService extends Service {
+export default class AuthService extends Service {
 
   init() {
     const c = this.app.config;
@@ -208,4 +202,4 @@ module.exports = class AuthService extends Service {
       });
     });
   }
-};
+}

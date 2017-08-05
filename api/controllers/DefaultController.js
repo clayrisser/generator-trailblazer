@@ -1,22 +1,18 @@
-'use strict';
+import Controller from 'trails/controller';
 
-const Controller = require('trails/controller');
+export default class DefaultController extends Controller {
 
-/**
- * @module DefaultController
- *
- * @description Default Controller included with a new Trails app
- * @see {@link http://trailsjs.io/doc/api/controllers}
- * @this TrailsApp
- */
-module.exports = class DefaultController extends Controller {
-
-  /**
-   * Return some info about this application
-   */
-  info(req, res) {
-    return this.app.services.DefaultService.getApplicationInfo().then(data => {
+  info(req, res, next) {
+    return this.app.services.DefaultService.getApplicationInfo().then((data) => {
       res.success(data);
-    }).catch(err => res.error(err));
+    }).catch(next);
   }
-};
+
+  api(req, res, next) {
+    return res.json('Hello Trailblazer!');
+  }
+
+  v1(req, res, next) {
+    return res.json('Hello Trailblazer v1!');
+  }
+}

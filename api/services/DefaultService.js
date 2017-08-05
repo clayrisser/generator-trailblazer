@@ -1,19 +1,7 @@
-'use strict';
+import Service from 'trails/service';
 
-const Service = require('trails/service');
+export default class DefaultService extends Service {
 
-/**
- * @module DefaultService
- *
- * @description Default Service included with a new Trails app
- * @see {@link http://trailsjs.io/doc/api/services}
- * @this TrailsApp
- */
-module.exports = class DefaultService extends Service {
-
-  /**
-   * Return some info about this application
-   */
   getApplicationInfo() {
     const trailpacks = [];
     Object.keys(this.app.packs).forEach(packName => {
@@ -32,4 +20,4 @@ module.exports = class DefaultService extends Service {
       trailpacks: trailpacks
     });
   }
-};
+}

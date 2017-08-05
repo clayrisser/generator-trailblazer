@@ -1,6 +1,4 @@
-'use strict';
-
-exports.controllers = require('./controllers');
-exports.models = require('./models');
-exports.policies = require('./policies');
-exports.services = require('./services');
+export const controllers = require('./controllers');
+export const models = require('./models');
+export const policies = require('./policies');
+export const services = require('./services');

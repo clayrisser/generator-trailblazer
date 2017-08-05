@@ -1,10 +1,4 @@
-/**
-  * api/responses/success.js
-  *
-  * @description Handles success in a clean way
- */
-
-const _ = require('lodash');
+import _ from 'lodash';
 
 module.exports = function(data, message) {
   if (!message) {

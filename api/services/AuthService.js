@@ -1,18 +1,11 @@
-'use strict';
+import Service from 'trails/service';
+import _ from 'lodash';
+import moment from 'moment';
+import jwt from 'jwt-simple';
+import passport from 'passport';
+import Err from 'err';
 
-const Service = require('trails/service');
-const _ = require('lodash');
-const moment = require('moment');
-const jwt = require('jwt-simple');
-const passport = require('passport');
-const Err = require('err');
-
-/**
- * @module AuthService
- *
- * @description Authentication Service
- */
-module.exports = class AuthService extends Service {
+export default class AuthService extends Service {
 
   register(req) {
     return new Promise((resolve, reject) => {
@@ -78,4 +71,4 @@ module.exports = class AuthService extends Service {
       token: this.generateToken(user)
     });
   }
-};
+}

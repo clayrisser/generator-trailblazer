@@ -1,15 +1,8 @@
-const controllerNames = Object.keys(require('../api/controllers'));
+import _ from 'lodash';
 
-/**
- * Footprints Configuration
- * (config.footprints)
- *
- * Footprints are routes that are auto-generated from your model and controller
- * definitions in api/controllers and api/models.
- *
- * @see http://trailsjs.io/doc/config/footprints
- */
-module.exports = {
+const controllerNames = _.keys(require('../api/controllers'));
+
+export default {
 
   /**
    * Generate routes for controller handlers.

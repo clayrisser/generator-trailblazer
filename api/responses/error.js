@@ -1,10 +1,4 @@
-/**
- * api/responses/error.js
- *
- * @description Handles error in a clean way
- */
-
-const log = require('../../config/log').logger;
+import log from '../../config/log';
 
 module.exports = function(err, verbose) {
   let code = 500;

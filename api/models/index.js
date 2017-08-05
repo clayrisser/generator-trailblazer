@@ -1,3 +1,1 @@
-'use strict';
-
-exports.User = require('./User');
+export const User = require('./User').default;

@@ -1,15 +1,9 @@
-'use strict';
+import Model from 'trails/model';
 
-const Model = require('trails/model');
-
-/**
- * @module User
- * @description TODO document Model
- */
-module.exports = class User extends Model {
+export default class User extends Model {
 
   static config () {
-
+    return;
   }
 
   static schema () {
@@ -46,4 +40,4 @@ module.exports = class User extends Model {
       facebookId: 'string'
     };
   }
-};
+}
