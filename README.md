@@ -150,7 +150,7 @@ If you want to use an external database instead of the linked mongo container, o
 | Name           | Default Value | Description                      |
 | -------------- | ------------- | -------------------------------- |
 | MONGO_HOST     | 'db'          | Host for mongo database          |
-| MONGO_PORT     | 27017'        | Port for mongo database          |
+| MONGO_PORT     | 27017         | Port for mongo database          |
 | MONGO_DATABASE | 'trailblazer' | Database name for mongo database |
 
 
