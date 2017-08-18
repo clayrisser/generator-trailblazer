@@ -53,7 +53,7 @@ Please &#9733; this repo if you found it useful &#9733; &#9733; &#9733;
 ### Scripts
 
 | Command         | Description                           |
-| -------         | -----------                           |
+| --------------- | ------------------------------------- |
 | `npm start`     | Start the development server          |
 | `npm run data`  | Run the database                      |
 | `npm run lint`  | Lint the code                         |
@@ -148,6 +148,7 @@ load-balancer:
 If you want to use an external database instead of the linked mongo container, override the following environment variables
 
 | Name           | Default Value | Description                      |
+| -------------- | ------------- | -------------------------------- |
 | MONGO_HOST     | 'db'          | Host for mongo database          |
 | MONGO_PORT     | 27017'        | Port for mongo database          |
 | MONGO_DATABASE | 'trailblazer' | Database name for mongo database |
