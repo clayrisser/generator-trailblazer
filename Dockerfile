@@ -1,5 +1,5 @@
 #############################################
-# Dockerfile to run Oauth Trails
+# Dockerfile to run trailblazer
 # Based on Alpine
 #############################################
 
@@ -12,20 +12,22 @@ ENV MONGO_PORT=27017
 ENV MONGO_DATABASE=trails
 ENV NODE_ENV=production
 
-EXPOSE 8802
+EXPOSE 3000
 
 WORKDIR /app/
 
-RUN apk add --no-cache tini && \
-    apk add --no-cache --virtual build-dependencies git && \
+RUN apk add --no-cache \
+        tini && \
+    apk add --no-cache --virtual build-deps \
+        git && \
     npm install -g eslint
 
 COPY ./package.json /app/
-RUN npm install --only=dev && npm install
+RUN npm install
 COPY ./ /app/
 RUN npm test && \
-    apk del build-dependencies && \
+    apk del build-deps && \
     npm uninstall -g eslint && \
     npm prune --production
 
-ENTRYPOINT ["/sbin/tini", "--", "node", "/app/server.js"]
+ENTRYPOINT ["/sbin/tini", "--", "node", "/app/node_modules/babel-cli/bin/babel-node", "/app/server.js"]

@@ -1,8 +1,8 @@
 import Service from 'trails/service';
 import passport from 'passport';
 import changeCase from 'change-case';
-import Err from 'err';
 import bCrypt from 'bcrypt-nodejs';
+import boom from 'boom';
 
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
@@ -58,7 +58,9 @@ export default class AuthService extends Service {
     return o.User.findOne({email: email}).then((user) => {
       if (user) {
         if (user.password && user.password.length > 0) {
-          throw new Err(`The email '${email}' is already taken`, 400);
+          throw boom.badRequest(`The email '${email}' is already taken`, {
+            email: email
+          });
         } else {
           return this.updatePassword(user, properties.password);
         }
@@ -66,7 +68,9 @@ export default class AuthService extends Service {
         return o.User.findOne({userName: userName}).then((user) => {
           if (user) {
             if (user.password && user.password.length > 0) {
-              throw new Err(`The username '${userName}' is already taken`, 400);
+              throw boom.badRequest(`The username '${userName}' is already taken`, {
+                userName: userName
+              });
             } else {
               return this.updatePassword(user, properties.password);
             }
@@ -85,15 +89,17 @@ export default class AuthService extends Service {
     return o.User.findOne({userName: userName}).then((user) => {
       if (!user) {
         return o.User.findOne({email: userName}).then((user) => {
-          if (!user) throw new Err(`No account exists for '${userName}'`, 400);
+          if (!user) throw boom.notFound(`No account exists for '${userName}'`, {
+            userName: userName
+          });
           return user;
         });
       }
       return user;
     }).then((user) => {
-      if (!user.password) throw new Err('Password not set', 400);
+      if (!user.password) throw boom.badRequest('Password not set');
       const valid = bCrypt.compareSync(password, user.password);
-      if (!valid) throw new Err('Incorrect password', 400);
+      if (!valid) throw boom.badRequest('Incorrect password');
       return cb(null, user);
     }).catch(err => cb(err, null));
   }

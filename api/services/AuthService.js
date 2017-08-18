@@ -3,7 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import jwt from 'jwt-simple';
 import passport from 'passport';
-import Err from 'err';
+import boom from 'boom';
 
 export default class AuthService extends Service {
 
@@ -35,7 +35,7 @@ export default class AuthService extends Service {
           scope: c.providers[provider].scope
         })(req, res);
       } else {
-        reject(new Err(provider + ' is an invalid provider', 400));
+        reject(boom.badRequest(`${provider} is an invalid provider`, { provider }));
       }
     });
   }
@@ -50,7 +50,7 @@ export default class AuthService extends Service {
           return resolve(user);
         })(req);
       } else {
-        reject(new Err(provider + ' is an invalid callback', 400));
+        reject(boom.badRequest(`${provider} is an invalid callback`, { provider }));
       }
     });
   }
@@ -65,7 +65,7 @@ export default class AuthService extends Service {
   }
 
   getToken(user) {
-    if (!user) return Promise.reject(new Err('user not logged in', 400));
+    if (!user) return Promise.reject(boom.unauthorized('user not logged in'));
     return Promise.resolve({
       user: user,
       token: this.generateToken(user)

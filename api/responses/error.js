@@ -1,9 +1,12 @@
-import log from '../../config/log';
+import { logger as log } from '../../config/log';
+import access from 'safe-access';
 
 module.exports = function(err, verbose) {
   let code = 500;
+  const statusCode = access(err, 'output.statusCode');
   verbose = false;
-  if (err.code && (100 <= code && code < 600)) code = Number(err.code);
+  if (statusCode && (100 <= statusCode && statusCode < 600)) code = Number(statusCode);
+  log.transports.console.label = code;
   if (code >= 500) {
     log.error(err);
   } else {
@@ -15,5 +18,7 @@ module.exports = function(err, verbose) {
       }
     }
   }
-  return this.status(code).json({ message: err.message });
+  const response = { message: err.message };
+  if (err.data) response.payload = err.data;
+  return this.status(code).json(response);
 };

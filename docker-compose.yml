@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  some-trailblazer:
+    image: jamrizzi/trailblazer:latest
+    ports:
+      - 80:3000
+    links:
+      - some-mongo:db
+
+  some-mongo:
+    image: mongo:latest
+    volumes:
+      - /volumes/trailblazer_some-trailblazer:/data/db

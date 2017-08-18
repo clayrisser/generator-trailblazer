@@ -1,6 +1,4 @@
-'use strict';
-
-const assert = require('assert');
+import assert from 'assert';
 
 describe('Trails App', () => {
   it('should boot', () => {

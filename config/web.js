@@ -13,8 +13,9 @@ export default {
   /**
    * Init method, can be used to customize express instance
    */
-  init: (trailsApp, expressApp) => {
-    trailsApp.log.info('app starteakfjdslkfdf');
+  init: (app, expressApp) => {
+    app.services.PassportService.init();
+    app.log.info('app started');
   },
 
   /**
@@ -66,7 +67,7 @@ export default {
   /**
    * The port to bind the web server to
    */
-  port: process.env.PORT || 8802,
+  port: process.env.PORT || 3000,
 
   /**
    * The host to bind the web server to

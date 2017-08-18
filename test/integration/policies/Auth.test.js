@@ -1,9 +1,7 @@
-'use strict';
+import assert from 'assert';
 
-// const assert = require('assert');
-
-// describe('Auth', () => {
-//   it('should exist', () => {
-//     assert(global.app.policies.Auth);
-//   });
-// });
+describe('Auth', () => {
+  it('should exist', () => {
+    assert(global.app.policies.AuthPolicy);
+  });
+});
