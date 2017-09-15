@@ -1,1 +1,1 @@
-export const User = require('./User').default;
+export const Cat = require('./Cat').default;

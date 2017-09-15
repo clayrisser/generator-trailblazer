@@ -1,11 +1,11 @@
 import Service from 'trails/service';
+import _ from 'lodash';
 
 export default class DefaultService extends Service {
-
   getApplicationInfo() {
     const trailpacks = [];
-    Object.keys(this.app.packs).forEach(packName => {
-      if (packName != 'inspect') {
+    _.keys(this.app.packs).forEach((packName) => {
+      if (packName !== 'inspect') {
         const pack = this.app.packs[packName];
         trailpacks.push({
           name: pack.name,
@@ -17,7 +17,7 @@ export default class DefaultService extends Service {
       app: this.app.pkg.version,
       node: process.version,
       libs: process.versions,
-      trailpacks: trailpacks
+      trailpacks
     });
   }
 }

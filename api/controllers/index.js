@@ -1,2 +1,2 @@
-export const AuthController = require('./AuthController').default;
+export const CatController = require('./CatController').default;
 export const DefaultController = require('./DefaultController').default;

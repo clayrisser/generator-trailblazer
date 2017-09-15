@@ -1,1 +1,1 @@
-export const AuthPolicy = require('./Auth').default;
+export const CatPolicy = require('./CatPolicy').default;

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-module.exports = function(data, message) {
+module.exports = (data, message) => {
   if (!message) {
     if (_.isString(data)) {
       return this.json({
@@ -10,7 +10,7 @@ module.exports = function(data, message) {
     message = 'Response successful';
   }
   return this.json({
-    message: message,
-    data: data
+    message,
+    data
   });
 };

@@ -28,35 +28,9 @@ export default [
         }
       }
     }
-  },
-
-  {
-    method: 'POST',
-    path: '/api/v1/auth/register',
-    handler: 'AuthController.register'
-  },
-
-  {
-    method: 'GET',
-    path: '/api/v1/auth/login',
-    handler: 'AuthController.login'
-  },
-
-  {
-    method: 'GET',
-    path: '/api/v1/auth/provider/{provider}',
-    handler: 'AuthController.provider'
-  },
-
-  {
-    method: 'GET',
-    path: '/api/v1/auth/callback/{provider}',
-    handler: 'AuthController.callback'
-  },
-
-  {
-    method: 'GET',
-    path: '/api/v1/auth/get-token',
-    handler: 'AuthController.getToken'
   }
+
+  /**
+   * Cat Routes
+   */
 ];

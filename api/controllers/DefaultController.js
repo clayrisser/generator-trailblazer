@@ -1,7 +1,6 @@
 import Controller from 'trails/controller';
 
 export default class DefaultController extends Controller {
-
   info(req, res, next) {
     return this.app.services.DefaultService.getApplicationInfo().then((data) => {
       res.success(data);
