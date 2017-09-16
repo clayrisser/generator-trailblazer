@@ -1,16 +1,20 @@
 import Generator from 'yeoman-generator';
 import _ from 'lodash';
+import moment from 'moment';
 
 export default class extends Generator {
   constructor(args, opts) {
     super(args, opts);
-    this.context = {};
   }
 
   initializing() {
     if (process.env.DEBUG && process.env.DEBUG.toLowerCase() === 'true') {
       this.destinationRoot('demo');
     }
+    this.context = {
+      date: moment().format('YYYY-MM-DD'),
+      year: moment().format('YYYY')
+    };
   }
 
   prompting() {
@@ -29,6 +33,31 @@ export default class extends Generator {
         type: 'input',
         name: 'version',
         message: 'Project Version:'
+      },
+      {
+        type: 'input',
+        name: 'repo',
+        message: 'Git Repo:'
+      },
+      {
+        type: 'input',
+        name: 'authorName',
+        message: 'Author Name:'
+      },
+      {
+        type: 'input',
+        name: 'authorEmail',
+        message: 'Author Email:'
+      },
+      {
+        type: 'input',
+        name: 'authorUrl',
+        message: 'Author URL:'
+      },
+      {
+        type: 'input',
+        name: 'homepage',
+        message: 'Homepage:'
       }
     ]).then((answers) => {
       this.answers = answers;

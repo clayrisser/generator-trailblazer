@@ -1,6 +1,6 @@
-# trailblazer _Alpha_
+# <%= name %>
 
-A pragmatic implementation of TrailsJS for rapid development
+<%= description %>
 
 Loosely based on a SailsJS workflow
 
@@ -15,30 +15,16 @@ Please &#9733; this repo if you found it useful &#9733; &#9733; &#9733;
 * Automatic endpoint creation with footprints
 * Express for the server
 * Waterline for the ORM
-* Mongo for the database
 * Super efficient docker support
 
 
 ## Setup
 
-1. Install dependencies and initialize project
-
-  ```sh
-  git clone git@github.com:jamrizzi/trailblazer.git
-  cd trailblazer && npm install
-  ```
-
-2. Start the database
-
-  ```
-  npm run data
-  ```
-  
-3. In another terminal start trailblazer
-
-  ```
-  npm start
-  ```
+```sh
+git clone <%= repo %>
+cd <%= name %> && npm install
+npm start
+```
 
 
 ## Dependencies
@@ -64,106 +50,10 @@ Please &#9733; this repo if you found it useful &#9733; &#9733; &#9733;
 | `npm run essh`  | SSH into the running docker container |
 | `npm run push`  | Push the docker container             |
 
-### Clustering
-
-You can cluster the docker container across multiple servers using an orchestration platform
-
-#### [Docker Swarm](https://docs.docker.com/engine/swarm/)
-
-```sh
-docker stack deploy --compose-file ./docker-compose.yml trailblazer
-docker service scale trailblazer_some-trailblazer=3
-```
-
-#### [Rancher](http://rancher.com/)
-
-##### Without Internal Load Balancer
-
-_docker-compose.yml_
-```yml
-some-trailblazer:
-  image: jamrizzi/trailblazer:latest
-  ports:
-    - 80:3000
-  links:
-    - some-mongo:db
-    
-some-mongo:
-  image: mongo:latest
-  volumes:
-    - /volumes/trailblazer_some-trailblazer:/data/db
-```
-
-_rancher-compose.yml_
-```yml
-some-trailblazer:
-  scale: 3
-```
-
-##### With Internal HaProxy Load Balancer
-
-_docker-compose.yml_
-```yml
-some-trailblazer:
-  image: jamrizzi/trailblazer:latest
-  links:
-    - some-mongo:db
-    
-some-mongo:
-  image: mongo:latest
-  volumes:
-    - /volumes/trailblazer_some-trailblazer:/data/db
-    
-load-balancer:
-  image: rancher/lb-service-haproxy:v0.7.1
-  ports:
-    - 80:80/tcp
-  labels:
-    io.rancher.container.agent.role: environmentAdmin
-    io.rancher.container.create_agent: 'true'
-```
-
-_rancher-compose.yml_
-```yml
-some-trailblazer:
-  scale: 3
-load-balancer:
-  start_on_create: true
-  lb_config:
-    port_rules:
-    - hostname: trailblazer.example.com
-      path: ''
-      protocol: http
-      service: trailblazer/some-trailblazer
-      source_port: 80
-      target_port: 3000
-```
-
-#### [Kubernetes](https://kubernetes.io/)
-
-#### [Mesos](http://mesos.apache.org/)
-
-### External Database
-
-If you want to use an external database instead of the linked mongo container, override the following environment variables
-
-| Name           | Default Value | Description                      |
-| -------------- | ------------- | -------------------------------- |
-| MONGO_HOST     | 'db'          | Host for mongo database          |
-| MONGO_PORT     | 27017         | Port for mongo database          |
-| MONGO_DATABASE | 'trailblazer' | Database name for mongo database |
-
 
 ## Support
 
-Submit an [issue](https://github.com/jamrizzi/trailblazer/issues/new)
-
-
-## Buy Me Coffee
-
-A ridiculous amount of coffee was consumed in the process of building this project.
-
-Add some fuel at [coffee.jamrizzi.com](https://coffee.jamrizzi.com/) if you'd like to keep me going!
+Submit an [issue](<%= repo %>/issues/new)
 
 
 ## Contributing
@@ -177,25 +67,19 @@ Add some fuel at [coffee.jamrizzi.com](https://coffee.jamrizzi.com/) if you'd li
 
 ## License
 
-[MIT License](https://github.com/jamrizzi/readme/blob/master/LICENSE)
+[MIT License](<%= repo %>/blob/master/LICENSE)
 
-[Jam Risser](https://jamrizzi.com) &copy; 2017
+[<%= authorName %>](<%= authorUrl %>) &copy; <%= year %>
 
 
 ## Credits
 
-* [Jam Risser](https://jamrizzi.com) - Author
+* [<%= authorName %>](<%= authorUrl %>) - Author
 * Built with [TrailsJS](https://trailsjs.io/)
 * Loosly based on [SailsJS](http://sailsjs.com/)
 
 
 ## Changelog
 
-0.0.3 (2017-08-17)
-* Added docker support
-
-0.0.3 (2017-08-05)
-* Refactored to es6
-
-0.0.1 (2017-02-24)
+<%= version %> (<%= date %>)
 * Initial release

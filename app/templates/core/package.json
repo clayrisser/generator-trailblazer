@@ -2,11 +2,11 @@
   "name": "<%= name %>",
   "version": "<%= version %>",
   "description": "<%= description %>",
-  "homepage": "https://github.com/jamrizzi/trails-imo",
+  "homepage": "<%= homepage %>",
   "author": {
-    "name": "Jam Risser",
-    "email": "jam@jamrizzi.com",
-    "url": "jam.jamrizzi.com"
+    "name": "<%= authorName %>",
+    "email": "<%= authorEmail %>",
+    "url": "<%= authorUrl %>"
   },
   "main": "index.js",
   "keywords": [
