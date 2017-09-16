@@ -1,7 +1,7 @@
 import access from 'safe-access';
 import { logger as log } from '../../config/log';
 
-module.exports = (err, verbose) => {
+module.exports = function error(err, verbose) {
   let code = 500;
   const statusCode = access(err, 'output.statusCode');
   verbose = false;

@@ -28,9 +28,34 @@ export default [
         }
       }
     }
-  }
+  },
 
   /**
    * Cat Routes
    */
+  {
+    method: 'POST',
+    path: '/api/v1/cat',
+    handler: 'CatController.create'
+  },
+  {
+    method: 'PUT',
+    path: '/api/v1/cat',
+    handler: 'CatController.update'
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/cat',
+    handler: 'CatController.findOne'
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/cats',
+    handler: 'CatController.find'
+  },
+  {
+    method: 'DELETE',
+    path: '/api/v1/cat',
+    handler: 'CatController.update'
+  }
 ];

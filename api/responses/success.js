@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-module.exports = (data, message) => {
+module.exports = function success(data, message) {
   if (!message) {
     if (_.isString(data)) {
       return this.json({
