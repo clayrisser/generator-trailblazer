@@ -1,22 +1,26 @@
 {
   "name": "generator-trailblazer",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Describe generator-trailblazer here",
+  "keywords": [
+    "yeoman-generator"
+  ],
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
-    "es",
-    "lib",
-    "umd"
+    "app",
+    "router"
   ],
   "scripts": {
-    "build": "nwb build-web-module",
-    "clean": "nwb clean-module",
-    "test": "nwb test",
-    "test:coverage": "nwb test --coverage",
-    "test:watch": "nwb test --server"
+    "build": "rm -rf ./app/ && node ./node_modules/nwb/lib/bin/nwb build-web-module && mv ./lib/ ./app/",
+    "yo": "npm run build && echo && yo trailblazer",
+    "clean": "rm -rf ./app/ && node ./node_modules/nwb/lib/bin/nwb clean-module",
+    "test": "node ./node_modules/nwb/lib/bin/nwb test",
+    "test:coverage": "node ./node_modules/nwb/lib/bin/nwb test --coverage",
+    "test:watch": "node ./node_modules/nwb/lib/bin/nwb test --server"
   },
   "dependencies": {
+    "yeoman-generator": "^1.0.0"
   },
   "devDependencies": {
     "nwb": "0.18.x"
