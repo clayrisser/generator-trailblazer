@@ -8,7 +8,8 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
-    "app"
+    "app",
+    "routes"
   ],
   "scripts": {
     "build": "rm -rf ./demo && node ./node_modules/nwb/lib/bin/nwb build-web-module && cp -r ./lib/* ./app/",
