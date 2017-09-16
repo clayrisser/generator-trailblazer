@@ -12,14 +12,15 @@
     "router"
   ],
   "scripts": {
-    "build": "rm -rf ./app/ && node ./node_modules/nwb/lib/bin/nwb build-web-module && mv ./lib/ ./app/",
-    "yo": "npm run build && echo && yo trailblazer",
-    "clean": "rm -rf ./app/ && node ./node_modules/nwb/lib/bin/nwb clean-module",
+    "build": "rm -rf ./demo && node ./node_modules/nwb/lib/bin/nwb build-web-module && cp -r ./lib/* ./app/",
+    "yo": "export DEBUG=true && npm run build && echo && yo trailblazer",
+    "clean": "rm ./app/index.js && rm -rf ./demo && node ./node_modules/nwb/lib/bin/nwb clean-module",
     "test": "node ./node_modules/nwb/lib/bin/nwb test",
     "test:coverage": "node ./node_modules/nwb/lib/bin/nwb test --coverage",
     "test:watch": "node ./node_modules/nwb/lib/bin/nwb test --server"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "yeoman-generator": "^1.0.0"
   },
   "devDependencies": {
