@@ -1,6 +1,7 @@
 import Generator from 'yeoman-generator';
 import _ from 'lodash';
 import moment from 'moment';
+import optionOrPrompt from 'yeoman-option-or-prompt';
 
 export default class extends Generator {
   constructor(args, opts) {
@@ -15,49 +16,58 @@ export default class extends Generator {
       date: moment().format('YYYY-MM-DD'),
       year: moment().format('YYYY')
     };
+    this.optionOrPrompt = optionOrPrompt;
   }
 
   prompting() {
-    return this.prompt([
+    return this.optionOrPrompt([
       {
         type: 'input',
         name: 'name',
-        message: 'Project Name:'
+        message: 'Project Name:',
+        default: 'some-name'
       },
       {
         type: 'input',
         name: 'description',
-        message: 'Project Description:'
+        message: 'Project Description:',
+        default: 'some-description'
       },
       {
         type: 'input',
-        name: 'version',
-        message: 'Project Version:'
+        name: 'productVersion',
+        message: 'Project Version:',
+        default: 'some-product-version'
       },
       {
         type: 'input',
         name: 'repo',
-        message: 'Git Repo:'
+        message: 'Git Repo:',
+        default: 'some-repo'
       },
       {
         type: 'input',
         name: 'authorName',
-        message: 'Author Name:'
+        message: 'Author Name:',
+        default: 'some-author-name'
       },
       {
         type: 'input',
         name: 'authorEmail',
-        message: 'Author Email:'
+        message: 'Author Email:',
+        default: 'some-author-email'
       },
       {
         type: 'input',
         name: 'authorUrl',
-        message: 'Author URL:'
+        message: 'Author URL:',
+        default: 'some-author-url'
       },
       {
         type: 'input',
         name: 'homepage',
-        message: 'Homepage:'
+        message: 'Homepage:',
+        default: 'some-homepage'
       }
     ]).then((answers) => {
       this.answers = answers;
@@ -72,10 +82,10 @@ export default class extends Generator {
 
   writing() {
     return Promise.all([
-      this.fs.copyTpl(this.templatePath('core/api/*/**'), this.destinationPath('api'), ...this.context),
-      this.fs.copyTpl(this.templatePath('core/config/*/**'), this.destinationPath('config'), ...this.context),
-      this.fs.copyTpl(this.templatePath('core/test/*/**'), this.destinationPath('test'), ...this.context),
-      this.fs.copy(this.templatePath('core/views/docs/*/**'), this.destinationPath('views/docs'), ...this.context),
+      this.fs.copyTpl(this.templatePath('core/api/**'), this.destinationPath('api'), ...this.context),
+      this.fs.copyTpl(this.templatePath('core/config/**'), this.destinationPath('config'), ...this.context),
+      this.fs.copyTpl(this.templatePath('core/test/**'), this.destinationPath('test'), ...this.context),
+      this.fs.copy(this.templatePath('core/views/docs/**'), this.destinationPath('views/docs'), ...this.context),
       this.fs.copy(this.templatePath('core/.dockerignore'), this.destinationPath('.dockerignore'), ...this.context),
       this.fs.copy(this.templatePath('core/.editorconfig'), this.destinationPath('.editorconfig'), ...this.context),
       this.fs.copy(this.templatePath('core/.eslintignore'), this.destinationPath('.eslintignore'), ...this.context),
@@ -87,8 +97,7 @@ export default class extends Generator {
       this.fs.copyTpl(this.templatePath('core/docker-compose.yml'), this.destinationPath('docker-compose.yml'), ...this.context),
       this.fs.copy(this.templatePath('core/index.js'), this.destinationPath('index.js'), ...this.context),
       this.fs.copyTpl(this.templatePath('core/package.json'), this.destinationPath('package.json'), ...this.context),
-      this.fs.copy(this.templatePath('core/server.js'), this.destinationPath('server.js'), ...this.context),
-      this.fs.copy(this.templatePath('core/yarn.lock'), this.destinationPath('yarn.lock'), ...this.context)
+      this.fs.copy(this.templatePath('core/server.js'), this.destinationPath('server.js'), ...this.context)
     ]);
   }
 

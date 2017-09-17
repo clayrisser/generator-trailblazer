@@ -81,5 +81,5 @@ Submit an [issue](<%= repo %>/issues/new)
 
 ## Changelog
 
-<%= version %> (<%= date %>)
+<%= productVersion %> (<%= date %>)
 * Initial release

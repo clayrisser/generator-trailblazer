@@ -1,12 +1,27 @@
-/coverage
-/demo
-/es
-/lib
-/node_modules
-/umd
-/app/index.js
+coverage/
+es/
+umd/
+app/index.js
 npm-debug.log*
 package-lock.json
+yarn-error.log
+#:gnore
+lib/
+demo/
+node_modules/
+
+# Demo
+demo/.*
+demo/api/
+demo/config/
+demo/test/
+demo/views/
+demo/Dockerfile
+demo/LICENSE
+demo/README.md
+demo/*.yml
+demo/*.json
+demo/*.js
 
 # Emacs
 \#*\#

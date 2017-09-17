@@ -1,6 +1,6 @@
 {
   "name": "<%= name %>",
-  "version": "<%= version %>",
+  "version": "<%= productVersion %>",
   "description": "<%= description %>",
   "homepage": "<%= homepage %>",
   "author": {
