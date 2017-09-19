@@ -18,6 +18,8 @@
     "trailsjs"
   ],
   "dependencies": {
+    <% if (database === 'mongo') %>"sails-mongo": "^0.12.2",
+    <% if (database === 'memory') %>"sails-memory": "^0.10.7",
     "babel-cli": "^6.24.1",
     "babel-preset-node6": "^11.0.0",
     "babel-preset-stage-2": "^6.24.1",
@@ -34,7 +36,6 @@
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "safe-access": "^0.1.0",
-    "sails-memory": "^0.10.7",
     "trailpack-express": "^2.0.3",
     "trailpack-footprints": "^2.0.0",
     "trailpack-repl": "v2-latest",

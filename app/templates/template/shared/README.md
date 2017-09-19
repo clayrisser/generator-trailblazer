@@ -21,7 +21,7 @@ Please &#9733; this repo if you found it useful &#9733; &#9733; &#9733;
 ## Setup
 
 ```sh
-git clone <%= repo %>
+git clone <%= homepage %>
 cd <%= name %> && npm install
 npm start
 ```
@@ -53,7 +53,7 @@ npm start
 
 ## Support
 
-Submit an [issue](<%= repo %>/issues/new)
+Submit an [issue](<%= homepage %>/issues/new)
 
 
 ## Contributing
@@ -67,9 +67,9 @@ Submit an [issue](<%= repo %>/issues/new)
 
 ## License
 
-[MIT License](<%= repo %>/blob/master/LICENSE)
+[MIT License](<%= homepage %>/blob/master/LICENSE)
 
-[<%= authorName %>](<%= authorUrl %>) &copy; <%= year %>
+[<%= authorName %>](<%= authorUrl %>) &copy; <%= moment().format('YYYY') %>
 
 
 ## Credits
@@ -81,5 +81,5 @@ Submit an [issue](<%= repo %>/issues/new)
 
 ## Changelog
 
-<%= productVersion %> (<%= date %>)
+<%= productVersion %> (<%= moment().format('YYYY-MM-DD') %>)
 * Initial release

@@ -1,20 +1,26 @@
 {
   "name": "generator-trailblazer",
   "version": "0.0.1",
-  "description": "Describe generator-trailblazer here",
+  "description": "A pragmatic implementation of TrailsJS for rapid development",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "express",
+    "expressjs",
+    "trails",
+    "trailsjs",
+    "sails",
+    "sailsjs",
+    "es6"
   ],
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
-    "app",
-    "routes"
+    "app"
   ],
   "scripts": {
     "build": "npm run clean && node ./node_modules/nwb/lib/bin/nwb build-web-module && cp -r ./lib/* ./app/",
     "yo": "export DEBUG=true && npm run build && echo && yo trailblazer",
-    "start": "node ./node_modules/nodemon/bin/nodemon -w ./app/templates -e js -x 'npm run yo -- --name=some-name --description=some-description --product-version=0.0.1 --repo=some-repo --author-name=some-author-name --author-email=some-author-email --author-url=some-author-url --homepage=some-homepage && node ./demo/node_modules/babel-cli/bin/babel-node ./demo/server.js || exit 1'",
+    "start": "node ./node_modules/nodemon/bin/nodemon -w ./src ./app/templates -x 'npm run yo -- --name=some-name --description=some-description --product-version=v0.0.1 --author-name=some-author-name --author-email=email@example.com --author-url=example.com --homepage=https://github.com/jamrizzi/trailblazer --template=minimal --database=memory --install=y && node ./demo/node_modules/babel-cli/bin/babel-node ./demo/server.js || exit 1'",
     "clean": "gnore clean",
     "test": "node ./node_modules/nwb/lib/bin/nwb test",
     "test:coverage": "node ./node_modules/nwb/lib/bin/nwb test --coverage",
