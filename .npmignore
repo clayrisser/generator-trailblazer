@@ -1,0 +1,20 @@
+coverage/
+npm-debug.log*
+yarn-error.log
+lib/
+demo/
+node_modules/
+src/
+tests/
+.editorconfig
+.eslintrc
+.gitignore
+.yarnclean
+.yarn.lock
+CONTRIBUTING.md
+nwb.config.js
+
+# Emacs
+\#*\#
+.\#*
+*~
