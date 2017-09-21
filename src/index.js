@@ -100,8 +100,10 @@ export default class extends Generator {
   conflicts() {}
 
   install() {
-    if (!this.answers.install || this.options.install[0].toLowerCase() === 'n'
-        || this.options.install[0].toLowerCase() === 'f') return;
+    const install = this.options.install ? this.options.install[0].toLowerCase() : 'y';
+    if (!this.answers.install || install === 'n' || install === 'f') {
+      return;
+    }
     this.installDependencies({
       npm: true,
       bower: false,

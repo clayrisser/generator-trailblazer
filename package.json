@@ -1,6 +1,6 @@
 {
   "name": "generator-trailblazer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A pragmatic implementation of TrailsJS for rapid development",
   "keywords": [
     "yeoman-generator",
@@ -20,6 +20,7 @@
   "scripts": {
     "clean": "make clean",
     "start": "node ./node_modules/nodemon/bin/nodemon -w ./src -w ./app/templates -x 'make yo && node ./demo/node_modules/babel-cli/bin/babel-node ./demo/server.js'",
+    "build": "make build",
     "test": "node ./node_modules/nwb/lib/bin/nwb test",
     "test:coverage": "node ./node_modules/nwb/lib/bin/nwb test --coverage",
     "test:watch": "node ./node_modules/nwb/lib/bin/nwb test --server"
