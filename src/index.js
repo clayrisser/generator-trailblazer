@@ -10,9 +10,8 @@ export default class extends Generator {
   }
 
   initializing() {
-    if (process.env.DEBUG && process.env.DEBUG.toLowerCase() === 'true') {
-      this.destinationRoot('demo');
-    }
+    const destinationRoot = this.option('destination', { type: String });
+    if (this.options.destination) this.destinationRoot(this.options.destination);
     this.context = {
       moment: moment
     };
@@ -101,7 +100,8 @@ export default class extends Generator {
   conflicts() {}
 
   install() {
-    if (!this.answers.install) return;
+    if (!this.answers.install || this.options.install[0].toLowerCase() === 'n'
+        || this.options.install[0].toLowerCase() === 'f') return;
     this.installDependencies({
       npm: true,
       bower: false,

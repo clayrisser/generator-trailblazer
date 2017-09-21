@@ -6,23 +6,10 @@ app/template.js
 npm-debug.log*
 package-lock.json
 yarn-error.log
+demo/
 #:gnore
 lib/
-demo/
 node_modules/
-
-# Demo
-demo/.*
-demo/api/
-demo/config/
-demo/test/
-demo/views/
-demo/Dockerfile
-demo/LICENSE
-demo/README.md
-demo/*.yml
-demo/*.json
-demo/*.js
 
 # Emacs
 \#*\#

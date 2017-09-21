@@ -18,10 +18,8 @@
     "app"
   ],
   "scripts": {
-    "build": "npm run clean && node ./node_modules/nwb/lib/bin/nwb build-web-module && cp -r ./lib/* ./app/",
-    "yo": "export DEBUG=true && npm run build && echo && yo trailblazer",
-    "start": "node ./node_modules/nodemon/bin/nodemon -w ./src ./app/templates -x 'npm run yo -- --name=some-name --description=some-description --product-version=v0.0.1 --author-name=some-author-name --author-email=email@example.com --author-url=example.com --homepage=https://github.com/jamrizzi/trailblazer --template=minimal --database=memory --install=y && node ./demo/node_modules/babel-cli/bin/babel-node ./demo/server.js || exit 1'",
-    "clean": "gnore clean",
+    "clean": "make clean",
+    "start": "node ./node_modules/nodemon/bin/nodemon -w ./src -w ./app/templates -x 'make yo && node ./demo/node_modules/babel-cli/bin/babel-node ./demo/server.js'",
     "test": "node ./node_modules/nwb/lib/bin/nwb test",
     "test:coverage": "node ./node_modules/nwb/lib/bin/nwb test --coverage",
     "test:watch": "node ./node_modules/nwb/lib/bin/nwb test --server"
