@@ -1,6 +1,6 @@
 {
   "name": "generator-trailblazer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A pragmatic implementation of TrailsJS for rapid development",
   "keywords": [
     "yeoman-generator",
