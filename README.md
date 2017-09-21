@@ -23,9 +23,8 @@ Please &#9733; this repo if you found it useful &#9733; &#9733; &#9733;
 
 ```sh
 sudo yarn global add generator-trailblazer # or `sudo npm install -g generator-trailblazer`
-mkdir my-app
+mkdir my-app && cd my-app
 yo trailblazer
-cd my-app
 yarn start # or `npm start`
 ```
 
