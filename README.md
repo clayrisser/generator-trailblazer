@@ -21,24 +21,13 @@ Please &#9733; this repo if you found it useful &#9733; &#9733; &#9733;
 
 ## Setup
 
-1. Install dependencies and initialize project
-
-  ```sh
-  git clone git@github.com:jamrizzi/trailblazer.git
-  cd trailblazer && npm install
-  ```
-
-2. Start the database
-
-  ```
-  npm run data
-  ```
-  
-3. In another terminal start trailblazer
-
-  ```
-  npm start
-  ```
+```sh
+sudo yarn global add generator-trailblazer # or `sudo npm install -g generator-trailblazer`
+mkdir my-app
+yo trailblazer
+cd my-app
+yarn start # or `npm start`
+```
 
 
 ## Dependencies
