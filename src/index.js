@@ -1,79 +1,109 @@
+import 'babel-polyfill';
 import Generator from 'yeoman-generator';
-import _ from 'lodash';
 import moment from 'moment';
 import optionOrPrompt from 'yeoman-option-or-prompt';
-import template from './template';
+import path from 'path';
+import {
+  copy,
+  guessEmail,
+  guessUsername,
+  guessName,
+  guessAuthorName,
+  isEmpty
+} from './lib';
 
-export default class extends Generator {
-  constructor(args, opts) {
-    super(args, opts);
-  }
-
+module.exports = class extends Generator {
   initializing() {
-    const destinationRoot = this.option('destination', { type: String });
-    if (this.options.destination) this.destinationRoot(this.options.destination);
+    if (this.options.destination)
+      this.destinationRoot(this.options.destination);
     this.context = {
-      moment: moment
+      moment
     };
     this.optionOrPrompt = optionOrPrompt;
   }
 
-  prompting() {
-    return this.optionOrPrompt([
+  async prompting() {
+    const { name } = await this.optionOrPrompt([
       {
         type: 'input',
         name: 'name',
         message: 'Project Name:',
-        default: 'trailblazer'
-      },
+        default: guessName()
+      }
+    ]);
+    const { description, version, license } = await this.optionOrPrompt([
       {
         type: 'input',
         name: 'description',
         message: 'Project Description:',
-        default: 'A pragmatic implementation of TrailsJS for rapid development'
+        default: `The awesome ${name} project`
       },
       {
         type: 'input',
-        name: 'productVersion',
-        message: 'Project Version:',
-        default: 'v0.0.1'
+        name: 'version',
+        message: 'Version:',
+        default: '0.0.1'
       },
+      {
+        type: 'input',
+        name: 'license',
+        message: 'License:',
+        default: 'MIT'
+      }
+    ]);
+    const { authorName, authorEmail } = await this.optionOrPrompt([
       {
         type: 'input',
         name: 'authorName',
         message: 'Author Name:',
-        default: 'Jam Risser'
+        default: guessAuthorName()
       },
       {
         type: 'input',
         name: 'authorEmail',
         message: 'Author Email:',
-        default: 'jam@jamrizzi.com'
-      },
+        default: guessEmail()
+      }
+    ]);
+    const { authorUrl } = await this.optionOrPrompt([
       {
         type: 'input',
         name: 'authorUrl',
         message: 'Author URL:',
-        default: 'https://jamrizzi.com'
-      },
+        default: `https://${guessUsername(authorEmail)}.com`
+      }
+    ]);
+    const {
+      database,
+      homepage,
+      repository,
+      template,
+      install
+    } = await this.optionOrPrompt([
       {
         type: 'input',
         name: 'homepage',
         message: 'Homepage:',
-        default: 'https://github.com/jamrizzi/trailblazer'
+        default: `https://github.com/${guessUsername(authorEmail)}/${name}`
+      },
+      {
+        type: 'input',
+        name: 'repository',
+        message: 'Repository:',
+        default: `https://github.com/${guessUsername(authorEmail)}/${name}`
       },
       {
         type: 'list',
         name: 'template',
         message: 'Template',
-        choices: [ "minimal" ],
+        choices: ['minimal'],
         default: 'minimal'
       },
       {
         type: 'list',
         name: 'database',
         message: 'Database',
-        choices: [ "memory", "mongo" ],
+        choices: ['memory', 'mongo'],
         default: 'memory'
       },
       {
@@ -82,29 +112,45 @@ export default class extends Generator {
         message: 'Install dependencies',
         default: true
       }
-    ]).then((answers) => {
-      this.answers = answers;
-      this.context = {...this.context, ...this.answers};
-      this.log('Name:', answers.name);
-    });
+    ]);
+    this.answers = {
+      name,
+      database,
+      description,
+      version,
+      license,
+      authorName,
+      authorUrl,
+      authorEmail,
+      homepage,
+      repository,
+      template,
+      install
+    };
+    this.context = { ...this.context, ...this.answers };
   }
 
-  configuring() {}
+  configuring() {
+    if (!this.options.destination && !isEmpty()) {
+      this.destinationRoot(path.resolve(`generator-${this.answers.name}`));
+    }
+  }
 
   default() {}
 
   writing() {
-    return template.copy(this);
+    return copy(this);
   }
 
   conflicts() {}
 
   install() {
-    const install = this.options.install ? this.options.install[0].toLowerCase() : 'y';
-    if (!this.answers.install || install === 'n' || install === 'f') {
-      return;
-    }
-    this.installDependencies({
+    const install = this.options.install
+      ? this.options.install[0].toLowerCase()
+      : 'y';
+    if (!this.answers.install || install === 'n' || install === 'f')
+      return false;
+    return this.installDependencies({
       npm: true,
       bower: false,
       yarn: false

@@ -1,15 +1,13 @@
-root = true
-
 [*]
-indent_style = space
-indent_size = 2
 end_of_line = lf
-trim_trailing_whitespace = true
+indent_size = 2
+indent_style = space
 insert_final_newline = true
+trim_trailing_whitespace = true
 
 [*.{js,json}]
 charset = utf-8
 
 [*.md]
-charset = utf-8
 trim_trailing_whitespace = false
+charset = utf-8

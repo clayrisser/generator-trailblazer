@@ -60,12 +60,16 @@ typings/
 # next.js build output
 .next
 
-# Editor
-\#*\#
-.\#*
+# Lock
+yarn.lock
+package-lock.json
+
+# Editors
 *~
-.idea/
+.\#*
+\#*\#
+idea/
 
 # Application
-demo/
-generators/*/*.js
+.tmp/
+dist/

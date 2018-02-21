@@ -1,6 +1,6 @@
 {
   "name": "generator-trailblazer",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A pragmatic implementation of TrailsJS for rapid development",
   "keywords": [
     "yeoman-generator",
@@ -12,31 +12,63 @@
     "sailsjs",
     "es6"
   ],
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "generators/app/index.js",
   "files": [
-    "app"
+    "generators"
   ],
   "scripts": {
-    "clean": "make clean",
-    "start": "node ./node_modules/nodemon/bin/nodemon -w ./src -w ./app/templates -x 'make yo && node ./demo/node_modules/babel-cli/bin/babel-node ./demo/server.js'",
-    "build": "make build",
-    "test": "node ./node_modules/nwb/lib/bin/nwb test",
-    "test:coverage": "node ./node_modules/nwb/lib/bin/nwb test --coverage",
-    "test:watch": "node ./node_modules/nwb/lib/bin/nwb test --server"
+    "build": "npm run clean && babel src -d generators/app",
+    "clean": "rm -rf demo generators/*/*.js",
+    "link": "npm link && npm link generator-trailblazer",
+    "lint": "eslint ./",
+    "lint:fix": "eslint --fix ./",
+    "prepublish": "npm run build",
+    "start": "npm run clean && npm run lint && npm run build && yo --destination=demo trailblazer",
+    "unlink": "npm unlink generator-trailblazer"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "empty-dir": "^0.2.1",
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "fs-extra-promise": "^1.0.1",
+    "git-user-email": "git+https://git@github.com/jamrizzi/git-user-email.git",
+    "git-user-name": "^2.0.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "yeoman-generator": "^1.0.0",
     "yeoman-option-or-prompt": "git+https://github.com/artefact-group/yeoman-option-or-prompt.git"
   },
   "devDependencies": {
-    "nodemon": "^1.12.1",
-    "nwb": "0.18.x"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "yo": "^2.0.1"
   },
-  "author": "",
-  "homepage": "",
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4"
+          }
+        }
+      ],
+      "stage-2"
+    ]
+  },
+  "author": "Jam Risser <jam@jamrizzi.com> (https://jam.jamrizzi.com)",
+  "homepage": "https://github.com/jamrizzi/generator-trailblazer",
   "license": "MIT",
-  "repository": ""
+  "repository": "https://github.com/jamrizzi/generator-trailblazer",
+  "eslintIgnore": [
+    "generators",
+    "demo"
+  ]
 }

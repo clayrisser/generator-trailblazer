@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb/base", "prettier"],
   "rules": {
     "comma-dangle": ["error", "never"],
     "jsx-a11y/href-no-hash": "off",
@@ -9,7 +9,8 @@
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
     "yoda": "off",
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "no-useless-escape": "off"
   },
   "env": {
     "node": true
